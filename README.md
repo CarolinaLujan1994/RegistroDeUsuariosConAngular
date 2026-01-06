@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RegisterUsers
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
@@ -57,3 +58,26 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+# miniProyectoAngular 
+Registro de usuarios con Angular
+
+Este proyecto es un **mini sistema de registro de usuarios** desarrollado en Angular.  El mismo permite agregar, editar y eliminar inscriptos, mostrando la lista en una tabla con ids.  
+Incluye validación de contraseñas, alertas con SweetAlert2 y diseño responsive ~~con un estilo cute, o eso se intentó~~. 
+
+## Funcionalidades
+- Registro de usuarios con validación de email y contraseñas.
+- Lista de inscriptos con ids con acciones para editar y borrar.
+- Edición en fila expandible.
+- Botón para descargar PDF con la lista de inscriptos.
+- Alertas integradas con SweetAlert2.
+
+## GitHub Pages
+https://CarolinaLujan1994.github.io/RegistroDeUsuariosConAngular
+
+## Tecnologías
+- Angular
+- TypeScript
+- HTML & CSS
+- SweetAlert2
+>>>>>>> 188d381e1abe34b73523c6873f1e0d41959918dc
