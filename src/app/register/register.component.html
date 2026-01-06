@@ -1,0 +1,99 @@
+<h2 class="cute-title">Registro de Usuario</h2>
+
+<div class="form-container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Nombre:</label>
+            <input formControlName="name" />
+        </div>
+
+        <div class="form-group">
+            <label>Email:</label>
+            <input formControlName="email" />
+        </div>
+
+        <div class="form-group">
+            <label>Contraseña:</label>
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password" />
+            <button type="button" (click)="togglePassword()">
+                {{ showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña' }}
+            </button>
+        </div>
+
+        <div class="form-group">
+            <label>Confirmar contraseña:</label>
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword" />
+        </div>
+
+        <div *ngIf="form.hasError('passwordMismatch') && form.controls['confirmPassword'].touched"
+            class="error-message">
+            Las contraseñas no coinciden
+        </div>
+
+        <button type="submit" [disabled]="form.invalid">Registrar</button>
+    </form>
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+</div>
+
+<h3 class="cute-subtitle">Lista de Inscriptos</h3>
+<table class="cute-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let user of users; let i = index">
+            <!-- Fila normal -->
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <button (click)="editUser(i)">Editar</button>
+                    <button (click)="confirmDelete(user)">Borrar</button>
+                </td>
+            </tr>
+
+            <tr *ngIf="editIndex === i" class="edit-row">
+                <td colspan="4">
+                    <form [formGroup]="editForm" (ngSubmit)="saveEdit(i)" class="edit-inline-form">
+                        <div class="form-group-inline">
+                            <label>Nombre:</label>
+                            <input formControlName="name" />
+                        </div>
+                        <div class="form-group-inline">
+                            <label>Email:</label>
+                            <input formControlName="email" />
+                        </div>
+                        <div class="form-group-inline">
+                            <label>Contraseña:</label>
+                            <input [type]="showPassword ? 'text' : 'password'" formControlName="password" />
+                        </div>
+
+                        <div class="toggle-button">
+                            <button type="button" (click)="togglePassword()">
+                                {{ showPassword ? 'Ocultar' : 'Mostrar' }}
+                            </button>
+                        </div>
+
+                        <div class="edit-actions">
+                            <button type="submit" [disabled]="editForm.invalid">Guardar</button>
+                            <button type="button" (click)="cancelEdit()">Cancelar</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<button (click)="downloadPDF()" [disabled]="users.length === 0" class="pdf-btn">
+    Descargar PDF
+</button>
